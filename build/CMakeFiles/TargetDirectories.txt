@@ -1,0 +1,3 @@
+/home/coco/Documents/c++/projects/vs-code-c++/photos_only_face_recognition/build/CMakeFiles/rebuild_cache.dir
+/home/coco/Documents/c++/projects/vs-code-c++/photos_only_face_recognition/build/CMakeFiles/edit_cache.dir
+/home/coco/Documents/c++/projects/vs-code-c++/photos_only_face_recognition/build/CMakeFiles/Photos_Only_Face_Recognition.dir
