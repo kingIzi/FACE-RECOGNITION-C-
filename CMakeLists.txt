@@ -32,7 +32,7 @@ set(ALL_HEADER_FILES
 
 include_directories(include/)
 
-add_executable(${PROJECT_NAME} ${ALL_SOURCE_FILES}) 
+add_executable(${PROJECT_NAME} ${ALL_HEADER_FILES} ${ALL_SOURCE_FILES}) 
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE FACE_DETECTION_CONFIGURATION="${FACE_DETECTION_CONFIGURATION}")
 target_compile_definitions(${PROJECT_NAME} PRIVATE FACE_DETECTION_WEIGHTS="${FACE_DETECTION_WEIGHTS}")
@@ -53,5 +53,5 @@ find_package(Qt6 REQUIRED COMPONENTS HttpServer Network Core Gui)
 #     target_link_libraries(main PRIVATE cpprestsdk::cpprest cpprestsdk::cpprestsdk_zlib_internal cpprestsdk::cpprestsdk_boost_internal cpprestsdk::cpprestsdk_openssl_internal)
 
 
-target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS} stdc++fs Qt6::Gui Qt6::Core Qt6::HttpServer 
+target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS} Qt6::Gui Qt6::Core Qt6::HttpServer 
 Qt6::Network) 
