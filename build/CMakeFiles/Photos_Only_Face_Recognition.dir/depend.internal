@@ -38,6 +38,7 @@ CMakeFiles/Photos_Only_Face_Recognition.dir/src/facedetect.cpp.o
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QScopedPointer
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QString
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QStringList
+ /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QTextStream
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QVariant
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QtCore
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QtCoreDepends
@@ -270,8 +271,10 @@ CMakeFiles/Photos_Only_Face_Recognition.dir/src/main.cpp.o
  ../include/requesthandler.hpp
  /home/coco/Documents/c++/projects/vs-code-c++/photos_only_face_recognition/src/main.cpp
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QCoreApplication
+ /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QFileInfo
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QFlags
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QJsonObject
+ /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QList
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QSharedDataPointer
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QString
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QUrl
@@ -315,6 +318,9 @@ CMakeFiles/Photos_Only_Face_Recognition.dir/src/main.cpp.o
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qelapsedtimer.h
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qeventloop.h
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qexception.h
+ /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qfile.h
+ /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qfiledevice.h
+ /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qfileinfo.h
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qflags.h
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qforeach.h
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qfuture.h
@@ -432,8 +438,10 @@ CMakeFiles/Photos_Only_Face_Recognition.dir/src/requesthandler.cpp.o
  /home/coco/Documents/c++/projects/vs-code-c++/photos_only_face_recognition/src/requesthandler.cpp
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QCoreApplication
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QDebug
+ /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QFileInfo
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QFlags
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QJsonObject
+ /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QList
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QSharedDataPointer
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QString
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QUrl
@@ -477,6 +485,9 @@ CMakeFiles/Photos_Only_Face_Recognition.dir/src/requesthandler.cpp.o
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qelapsedtimer.h
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qeventloop.h
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qexception.h
+ /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qfile.h
+ /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qfiledevice.h
+ /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qfileinfo.h
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qflags.h
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qforeach.h
  /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qfuture.h

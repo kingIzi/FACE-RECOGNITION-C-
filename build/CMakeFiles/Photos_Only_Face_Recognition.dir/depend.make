@@ -37,6 +37,7 @@ CMakeFiles/Photos_Only_Face_Recognition.dir/src/facedetect.cpp.o: /home/coco/Qt/
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/facedetect.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QScopedPointer
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/facedetect.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QString
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/facedetect.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QStringList
+CMakeFiles/Photos_Only_Face_Recognition.dir/src/facedetect.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QTextStream
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/facedetect.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QVariant
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/facedetect.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QtCore
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/facedetect.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QtCoreDepends
@@ -269,8 +270,10 @@ CMakeFiles/Photos_Only_Face_Recognition.dir/src/main.cpp.o: ../include/facedetec
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/main.cpp.o: ../include/requesthandler.hpp
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/main.cpp.o: ../src/main.cpp
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/main.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QCoreApplication
+CMakeFiles/Photos_Only_Face_Recognition.dir/src/main.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QFileInfo
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/main.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QFlags
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/main.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QJsonObject
+CMakeFiles/Photos_Only_Face_Recognition.dir/src/main.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QList
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/main.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QSharedDataPointer
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/main.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QString
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/main.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QUrl
@@ -314,6 +317,9 @@ CMakeFiles/Photos_Only_Face_Recognition.dir/src/main.cpp.o: /home/coco/Qt/6.4.1/
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/main.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qelapsedtimer.h
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/main.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qeventloop.h
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/main.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qexception.h
+CMakeFiles/Photos_Only_Face_Recognition.dir/src/main.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qfile.h
+CMakeFiles/Photos_Only_Face_Recognition.dir/src/main.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qfiledevice.h
+CMakeFiles/Photos_Only_Face_Recognition.dir/src/main.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qfileinfo.h
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/main.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qflags.h
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/main.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qforeach.h
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/main.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qfuture.h
@@ -431,8 +437,10 @@ CMakeFiles/Photos_Only_Face_Recognition.dir/src/requesthandler.cpp.o: ../include
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/requesthandler.cpp.o: ../src/requesthandler.cpp
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/requesthandler.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QCoreApplication
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/requesthandler.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QDebug
+CMakeFiles/Photos_Only_Face_Recognition.dir/src/requesthandler.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QFileInfo
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/requesthandler.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QFlags
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/requesthandler.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QJsonObject
+CMakeFiles/Photos_Only_Face_Recognition.dir/src/requesthandler.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QList
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/requesthandler.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QSharedDataPointer
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/requesthandler.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QString
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/requesthandler.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QUrl
@@ -476,6 +484,9 @@ CMakeFiles/Photos_Only_Face_Recognition.dir/src/requesthandler.cpp.o: /home/coco
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/requesthandler.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qelapsedtimer.h
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/requesthandler.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qeventloop.h
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/requesthandler.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qexception.h
+CMakeFiles/Photos_Only_Face_Recognition.dir/src/requesthandler.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qfile.h
+CMakeFiles/Photos_Only_Face_Recognition.dir/src/requesthandler.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qfiledevice.h
+CMakeFiles/Photos_Only_Face_Recognition.dir/src/requesthandler.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qfileinfo.h
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/requesthandler.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qflags.h
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/requesthandler.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qforeach.h
 CMakeFiles/Photos_Only_Face_Recognition.dir/src/requesthandler.cpp.o: /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qfuture.h

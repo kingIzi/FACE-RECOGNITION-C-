@@ -13,15 +13,17 @@ opencv2/face.hpp
 -
 opencv2/highgui.hpp
 -
-iostream
--
-fstream
--
-sstream
--
 string
 -
+tuple
+-
+vector
+-
+QtCore/QList
+-
 QtCore/QJsonObject
+-
+QtCore/QFileInfo
 -
 
 /home/coco/Documents/c++/projects/vs-code-c++/photos_only_face_recognition/src/facedetect.cpp
@@ -31,8 +33,6 @@ list
 -
 iterator
 -
-QtCore/QFileInfo
--
 QtCore/QDir
 -
 QtConcurrent/QtConcurrent
@@ -40,6 +40,8 @@ QtConcurrent/QtConcurrent
 QtCore/QDirIterator
 -
 QtCore/QFile
+-
+QtCore/QTextStream
 -
 facedetect.hpp
 /home/coco/Documents/c++/projects/vs-code-c++/photos_only_face_recognition/src/facedetect.hpp
@@ -299,6 +301,10 @@ qstring.h
 /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QStringList
 qstringlist.h
 /home/coco/Qt/6.4.1/gcc_64/include/QtCore/qstringlist.h
+
+/home/coco/Qt/6.4.1/gcc_64/include/QtCore/QTextStream
+qtextstream.h
+/home/coco/Qt/6.4.1/gcc_64/include/QtCore/qtextstream.h
 
 /home/coco/Qt/6.4.1/gcc_64/include/QtCore/QVariant
 qvariant.h
