@@ -11,14 +11,16 @@
 #include <QtCore/QList>
 #include <QtCore/QJsonObject>
 #include <QtCore/QFileInfo>
+#include <QtCore/QDir>
 
 
 class FaceDetect{
     private:
-        std::string trainningDataset;
-        std::string testingDataset;
+        QDir trainData;
+        QDir testData;
         cv::Ptr<cv::face::LBPHFaceRecognizer> model;
-        bool hasTrained;
+        std::vector<cv::Mat> images;
+        std::vector<int> labels;   
     private:
         void read_csv(const std::string& filename, std::vector<cv::Mat>& images, std::vector<int>& labels, char separator = ';');
         void read_csv_as_filenames(const std::string& filename, std::vector<std::string>& images, std::vector<int>& labels, char separator = ';');
@@ -27,7 +29,12 @@ class FaceDetect{
         const std::tuple<int,double,std::string> makePrediction(const std::string& filePath);
         const QList<QString> getDirNamesList(char separator = ';') const;
 
+        const QJsonObject trainDataset(const QList<QFileInfo>& directories,const QFileInfoList::const_iterator& it,const std::string& identifier);
+        void startTrainning(const std::vector<cv::Mat>& images,const std::vector<int>& labels);
         const QJsonObject startTrainning(const QList<QFileInfo>& files,const std::string& identifier,const int indexOf,std::vector<cv::Mat>& images,std::vector<int>& labels);
+
+        const bool missingSuffix(const std::string& filename) const;
+        const QJsonObject predictFace(const QList<QFileInfo>& files,const QFileInfoList::const_iterator& it,const std::string& filename);
 
         //errors
         const QJsonObject alreadyTrainedDataset(const std::string& identifier) const;
@@ -41,7 +48,6 @@ class FaceDetect{
         const QJsonObject predictionSuccessfull(const int predictedLabel,double confidence,const std::string name,const std::string input) const;
     public: 
         FaceDetect(const char* trainningDataset,const char* testingDataset);
-        void trainDataset();
-        QJsonObject trainDataset(const std::string& identifier);
+        const QJsonObject trainDataset(const std::string& identifier);
         const QJsonObject predictFace(const std::string& filePath);
 };

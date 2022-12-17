@@ -12,13 +12,15 @@
 
 //constructor
 FaceDetect::FaceDetect(const char* trainningDataset,const char* testingDataset) : 
-    trainningDataset(trainningDataset),
-    testingDataset(testingDataset),
-    model(cv::face::LBPHFaceRecognizer::create()),
-    hasTrained(false)
+    trainData(trainningDataset),
+    testData(testingDataset),
+    model(cv::face::LBPHFaceRecognizer::create(4, 8, 8, 8, 5000))
 {
     if (QFileInfo::exists(RECOGNITION_MODEL)){
         this->model->read(RECOGNITION_MODEL);
+    }
+    else if (!this->trainData.exists() || !this->testData.exists()){
+        throw std::invalid_argument("Une erreur c'est produite. Le Train dataset or test dataset est vide.");
     }
 }
 
@@ -125,50 +127,73 @@ const QJsonObject FaceDetect::trainDatasetSuccessfull(const std::string& identif
     return response;
 }
 
+//face detect thread
+void FaceDetect::startTrainning(const std::vector<cv::Mat>& images,const std::vector<int>& labels)
+{
+    qDebug() << "Started Trainning...";
+    if (!QFileInfo::exists(RECOGNITION_MODEL)){
+        this->model->train(images, labels);
+        this->model->save(RECOGNITION_MODEL);
+    }
+    else{
+        this->model->update(images, labels);
+        this->model->save(RECOGNITION_MODEL);
+    }
+    qDebug() << "Saving model please wait...";
+    const short SECONDS = 10000;
+    std::this_thread::sleep_for(std::chrono::milliseconds(SECONDS));
+    qDebug() << "Trainning finished!!!";
+    this->images.clear();
+    this->labels.clear();
+}
+
 //start trainning data stored in dataset.txt in new tread
 const QJsonObject FaceDetect::startTrainning(const QList<QFileInfo>& files,const std::string& identifier,const int indexOf,std::vector<cv::Mat>& images,std::vector<int>& labels)
 {
-    this->hasTrained = true;
     for (const auto& file : files){
         const auto filePath = file.absoluteFilePath().toStdString();
         this->appendTrainnedModelNames(filePath,indexOf);
     }
     this->read_csv(DATASET_CSV,images,labels);
-    const auto future = QtConcurrent::run([images,labels,this](){
-        qDebug() << "Started Trainning...";
-        this->model->train(images, labels);
-        this->model->save(RECOGNITION_MODEL);
-        qDebug() << "Trainning finished!!!";
+    const auto future = QtConcurrent::run([images,labels,this]() {
+        this->startTrainning(images,labels);
     });
     return this->trainDatasetSuccessfull(identifier);
 }
 
+const QJsonObject FaceDetect::trainDataset(const QList<QFileInfo>& directories,const QFileInfoList::const_iterator& it,const std::string& identifier)
+{
+    if (it != directories.end()){
+        const auto distance = std::distance(directories.begin() , it);
+        const auto file = directories[distance];
+        this->trainData.cd(file.fileName());
+        const auto files = this->trainData.entryInfoList(QStringList() << "*.jpg" << "*.png" << "*.jpeg",QDir::Files,QDir::Name);
+        this->trainData.cdUp();
+        if (files.isEmpty()){
+            return this->emptyTrainningDataset(identifier);
+        }
+        const auto indexOf = directories.indexOf(file);
+        // std::vector<cv::Mat> images; images.reserve(files.size());
+        // std::vector<int> labels; labels.reserve(files.size());
+        this->images.reserve(files.size()); 
+        this->labels.reserve(files.size());
+        return this->startTrainning(files,identifier,indexOf,images,labels);
+    }
+    return this->trainningDatasetNotFound(identifier);
+}
+
 //train dataset endpoint
-QJsonObject FaceDetect::trainDataset(const std::string& identifier)
+const QJsonObject FaceDetect::trainDataset(const std::string& identifier)
 {
     const auto names = this->getDirNamesList();
     if (names.contains(identifier.c_str())){
         return this->alreadyTrainedDataset(identifier);
     }
-    QDir directory(this->trainningDataset.c_str());
-    const auto directories = directory.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoDot);
+    const auto directories = this->trainData.entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoDot);
     const auto it = std::find_if(directories.begin(),directories.end(),[identifier](const QFileInfo& dir){
         return identifier == dir.fileName().toStdString();
     });
-    if (it != directories.end()){
-        const auto distance = std::distance(directories.begin() , it);
-        const auto dir = directories[distance];
-        directory.cd(dir.fileName());
-        const auto files = directory.entryInfoList(QStringList() << "*.jpg" << "*.png" << "*.jpeg",QDir::Files,QDir::Name);
-        if (files.isEmpty()){
-            return this->emptyTrainningDataset(identifier);
-        }
-        const auto indexOf = directories.indexOf(dir);
-        std::vector<cv::Mat> images; images.reserve(files.size());
-        std::vector<int> labels; labels.reserve(files.size());
-        return this->startTrainning(files,identifier,indexOf,images,labels);
-    }
-    return this->trainningDatasetNotFound(identifier);
+    return this->trainDataset(directories,it,identifier);
 }
 
 //predict dataset error
@@ -200,6 +225,8 @@ const QJsonObject FaceDetect::predictionSuccessfull(const int predictedLabel,dou
     response.insert("code",200);
     response.insert("input",input.c_str());
     response.insert("found",name.c_str());
+    response.insert("predictedClassLabel",predictedLabel);
+    response.insert("confidence",confidence);
     return response;    
 }
 
@@ -220,8 +247,9 @@ const std::tuple<int,double,std::string> FaceDetect::makePrediction(const std::s
     const auto frame = cv::imread(filePath,0);
     int predictedLabel = -1;
     double confidence = 0.0;
+    const short C = 50; //confidence must be less than this for a matched recognition label
     this->model->predict(frame, predictedLabel, confidence);
-    if (predictedLabel != -1){
+    if (predictedLabel != -1 && confidence < C){
         const auto name = this->findNameByClassLabel(predictedLabel);
         return std::make_tuple(predictedLabel,confidence,name);
     }
@@ -230,35 +258,40 @@ const std::tuple<int,double,std::string> FaceDetect::makePrediction(const std::s
     }
 }
 
-
-//predict face endpoint
-const QJsonObject FaceDetect::predictFace(const std::string& filename)
+const QJsonObject FaceDetect::predictFace(const QList<QFileInfo>& files,const QFileInfoList::const_iterator& it,const std::string& filename)
 {
-    const auto suffix = [filename](){
-        const auto isPng = filename.substr(filename.find_last_of(".") + 1) == "png";
-        const auto isJpg = filename.substr(filename.find_last_of(".") + 1) == "jpg";
-        const auto isJpeg = filename.substr(filename.find_last_of(".") + 1) == "jpeg";
-        const auto isPgm = filename.substr(filename.find_last_of(".") + 1) == "pgm";
-        return isPng || isJpg || isJpeg || isPgm;
-    };
-    if(!suffix()) {
-        return this->predictFaceInvalidInputError(filename);
-    } 
-    const QDir dir(this->testingDataset.c_str());
-    const auto files = dir.entryInfoList(QDir::NoDot | QDir::NoDotDot | QDir::Files);
-    const auto it = std::find_if(files.begin(),files.end(),[filename](const QFileInfo& file){
-        return filename == file.fileName().toStdString();
-    });
-    if (!this->hasTrained){
+    if (!QFileInfo::exists(RECOGNITION_MODEL)){
         return this->modelNotCreatedError(filename);
     }
     else if (it != files.end()){
-        const auto predict = this->makePrediction(it->absoluteFilePath().toStdString());
+        const auto predict = this->makePrediction(it->absoluteFilePath().toStdString()); //predicted label,confidence, found
         return this->predictionSuccessfull(std::get<0>(predict),std::get<1>(predict),std::get<2>(predict),filename);
     }
     else{
         return this->predictFaceNameNotFound(filename);
     }
+}
+
+const bool FaceDetect::missingSuffix(const std::string& filename) const
+{
+    const auto isPng = filename.substr(filename.find_last_of(".") + 1) == "png";
+    const auto isJpg = filename.substr(filename.find_last_of(".") + 1) == "jpg";
+    const auto isJpeg = filename.substr(filename.find_last_of(".") + 1) == "jpeg";
+    const auto isPgm = filename.substr(filename.find_last_of(".") + 1) == "pgm";
+    return !(isPng || isJpg || isJpeg || isPgm);
+}
+
+//predict face endpoint
+const QJsonObject FaceDetect::predictFace(const std::string& filename)
+{
+    if (this->missingSuffix(filename)){
+        return this->predictFaceInvalidInputError(filename);
+    }
+    const auto files = this->testData.entryInfoList(QDir::NoDot | QDir::NoDotDot | QDir::Files);
+    const auto it = std::find_if(files.begin(),files.end(),[filename](const QFileInfo& file){
+        return filename == file.fileName().toStdString();
+    });
+    return this->predictFace(files,it,filename);
 }
 
 //get list of class labels and return label at given index
@@ -275,7 +308,7 @@ const std::string FaceDetect::findNameByClassLabel(int& predictedLabel)
         return dir.dirName().toStdString();        
     }
     else{
-        return "Unknown";
+        return "Inconnue";
     }
 }
 

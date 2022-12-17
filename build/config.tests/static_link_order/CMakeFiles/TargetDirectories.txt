@@ -1,5 +1,0 @@
-/home/coco/Documents/c++/projects/vs-code-c++/photos_only_face_recognition/build/config.tests/static_link_order/CMakeFiles/rebuild_cache.dir
-/home/coco/Documents/c++/projects/vs-code-c++/photos_only_face_recognition/build/config.tests/static_link_order/CMakeFiles/edit_cache.dir
-/home/coco/Documents/c++/projects/vs-code-c++/photos_only_face_recognition/build/config.tests/static_link_order/CMakeFiles/static_link_order_test.dir
-/home/coco/Documents/c++/projects/vs-code-c++/photos_only_face_recognition/build/config.tests/static_link_order/CMakeFiles/staticLib.dir
-/home/coco/Documents/c++/projects/vs-code-c++/photos_only_face_recognition/build/config.tests/static_link_order/CMakeFiles/objLib.dir

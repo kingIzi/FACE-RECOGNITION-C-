@@ -4,21 +4,23 @@
 
 #include <QtHttpServer/QHttpServer>
 #include <QtCore/QString>
+#include <QtCore/QCoreApplication>
 
 #include "facedetect.hpp"
 
 class RequestHandler{
     private:
-        char* argv = new char[0];
+        QCoreApplication app;
+        QString argument;
         std::unique_ptr<FaceDetect> faceDetect = nullptr;
     private:
         QHttpServer server;
         void predictName();
         void trainNewName();
-    public:
-        RequestHandler(char * argv[]);
-        void startListening();
         void initialize();
+    public:
+        RequestHandler(int argc,char * argv[],const char* argument);
+        int startListening();
 };
 
 // class RequestHandler{
